@@ -13,8 +13,14 @@ exports.route = (command, handler) ->
 
 handleMessage = (msg) ->
 	console.log "Handling message " + msg.message_id
+	handler = (arg) ->
+		console.log 'Nothing done for ' + msg.text
+	l = 0
 	for r in routes
-		r.handler msg if msg.text.startsWith r.command
+		if (msg.text.startsWith r.command) and (r.command.length >= l)
+			handler = r.handler
+			l = r.command.length
+	handler msg
 
 exports.handleRequest = (req, res, next) ->
 	console.log req.params if req.params
