@@ -20,6 +20,8 @@ server.pre (req, res, next) =>
 
 server.post "/" + auth.key, serv.handleRequest
 
+serv.route '/hello', serv.handleHello
+
 telegram.setWebhook auth.urlbase + "/" + auth.key, (error) =>
 	if !error
 		console.log 'Server registered.'
