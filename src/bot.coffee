@@ -2,6 +2,7 @@ restify = require 'restify'
 
 telegram = require './telegram'
 serv = require './server'
+functions = require './functions'
 auth = require './conf/auth.json'
 
 server = restify.createServer
@@ -20,7 +21,7 @@ server.pre (req, res, next) =>
 
 server.post "/" + auth.key, serv.handleRequest
 
-serv.route '/hello', serv.handleHello
+functions.setupRoutes()
 
 telegram.setWebhook auth.urlbase + "/" + auth.key, (error) =>
 	if !error
