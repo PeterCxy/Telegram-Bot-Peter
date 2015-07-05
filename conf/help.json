@@ -5,8 +5,23 @@
 	"des": "Just Hello"
 },
 {
+	"cmd": "help",
+	"arg": "[command]",
+	"des": "Get help for [command]. If no arguments passed, show the full help string."
+},
+{
 	"cmd": "remind",
-	"arg": "[time] [message]",
-	"des": "Send [message] to you after [time]"
+	"arg": "<time> <message>",
+	"des": "Send <message> to you after <time>. <time> should be in format: AdBhCmDs, must less than 24d."
+},
+{
+	"cmd": "parse",
+	"arg": "anything",
+	"des": "[DEBUG] Output the parsed args"
+},
+{
+	"cmd": "parsetime",
+	"arg": "<time>",
+	"des": "[DEBUG] Output the milliseconds of parsed time. Format: AdBhCmDs"
 }
 ]
