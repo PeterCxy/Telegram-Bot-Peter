@@ -2,7 +2,8 @@ telegram = require './telegram'
 server = require './server'
 parser = require './parser'
 
-unrecognized = 'Unrecoginized command, say what?'
+unrecognized = (msg) ->
+	telegram.sendMessage msg.chat.id, 'Unrecognized command, say what?'
 
 handleHello = (msg) ->
 	console.log 'Hello command ' + msg.message_id
@@ -19,14 +20,23 @@ handleParse = (msg) ->
 handleRemind = (msg) ->
 	console.log 'Remind command ' + msg.message_id
 	options = parser.parse msg.text
-	if options.length >= 2
+	if options.length == 2
 		setTimeout =>
 			telegram.sendMessage msg.chat.id, options[1]
 		, options[0]
 	else
-		telegram.sendMessage msg.chat.id, unrecognized
+		unrecognized()
+
+handleParseTime = (msg) ->
+	console.log 'Parse time command ' + msg.message_id
+	options = parser.parse msg.text
+	if options.length == 1
+		telegram.sendMessage msg.chat.id, parser.time options[0]
+	else
+		unrecognized()
 
 exports.setupRoutes = () ->
 	server.route '/hello', handleHello
 	server.route '/parse', handleParse
+	server.route '/parsetime', handleParseTime
 	server.route '/remind', handleRemind
