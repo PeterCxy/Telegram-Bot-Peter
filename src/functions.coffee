@@ -23,7 +23,7 @@ handleRemind = (msg) ->
 	if options.length == 2
 		setTimeout =>
 			telegram.sendMessage msg.chat.id, options[1]
-		, options[0]
+		, parser.time options[0]
 	else
 		unrecognized()
 
