@@ -2,8 +2,24 @@ telegram = require './telegram'
 server = require './server'
 parser = require './parser'
 
+help = require './conf/help.json'
+
 unrecognized = (msg) ->
 	telegram.sendMessage msg.chat.id, 'Unrecognized command, say what?'
+
+handleHelp = (msg) ->
+	opt = ""
+	options = parser.parse msg.text
+	if options.length == 0
+		for h in help
+			opt += "/#{h.cmd} #{h.arg}\n#{h.des}\n\n"
+	else
+		for h in help
+			if h.cmd == options[0]
+				opt += "/#{h.cmd} #{h.arg}\n#{h.des}\n\n"
+				break
+		opt = 'Helpless' if opt == ''
+	telegram.sendMessage msg.chat.id, opt
 
 handleHello = (msg) ->
 	console.log 'Hello command ' + msg.message_id
@@ -36,6 +52,7 @@ handleParseTime = (msg) ->
 		unrecognized()
 
 exports.setupRoutes = () ->
+	server.route '/help', handleHelp
 	server.route '/hello', handleHello
 	server.route '/parse', handleParse
 	server.route '/parsetime', handleParseTime

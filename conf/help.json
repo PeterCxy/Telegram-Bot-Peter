@@ -1,0 +1,12 @@
+[
+{
+	"cmd": "hello",
+	"arg": "",
+	"des": "Just Hello"
+},
+{
+	"cmd": "remind",
+	"arg": "[time] [message]",
+	"des": "Send [message] to you after [time]"
+}
+]
