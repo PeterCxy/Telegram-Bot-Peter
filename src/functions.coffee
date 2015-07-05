@@ -51,9 +51,17 @@ handleParseTime = (msg) ->
 	else
 		unrecognized()
 
+# Secret function: help for the BotFather
+handleFather = (msg) ->
+	opt = ''
+	for h in help
+		opt += "#{h.cmd} - #{h.arg} #{h.des}\n"
+	telegram.sendMessage msg.chat.id, opt
+
 exports.setupRoutes = () ->
 	server.route '/help', handleHelp
 	server.route '/hello', handleHello
 	server.route '/parse', handleParse
 	server.route '/parsetime', handleParseTime
 	server.route '/remind', handleRemind
+	server.route '/father', handleFather
