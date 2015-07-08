@@ -1,3 +1,4 @@
 conf/auth.json
+conf/memcached.json
 node_modules
 out

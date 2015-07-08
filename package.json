@@ -1,9 +1,10 @@
 {
 	"name": "telegram-bot-peter",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "My toy bot",
-	"dependencies":{
-		"restify":"*",
-		"request":">=2.45.0"
+	"dependencies": {
+		"restify": "*",
+		"request": ">=2.45.0",
+		"memcached": ">=2.1.0" 
 	}
 }

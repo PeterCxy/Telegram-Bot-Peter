@@ -1,6 +1,7 @@
 telegram = require './telegram'
 server = require './server'
 parser = require './parser'
+store = require './store'
 
 help = require './conf/help.json'
 
@@ -52,6 +53,26 @@ exports.setupRoutes = ->
 			telegram.sendMessage msg.chat.id, parser.time options[0]
 		else
 			unrecognized()
+	
+	server.route '/store-put', (msg) ->
+		console.log 'Store put command'
+		options = parser.parse msg.text
+		if options.length == 1
+			store.put 'simple-store', msg.chat.id, options[0], (err) ->
+				if err
+					telegram.sendMessage msg.chat.id, 'Stored nothing'
+				else
+					telegram.sendMessage msg.chat.id, 'successful'
+		else
+			unrecognized()
+	
+	server.route '/store-get', (msg) ->
+		console.log 'Store get command'
+		store.get 'simple-store', msg.chat.id, (err, data) ->
+			if err or data.trim() == ''
+				telegram.sendMessage msg.chat.id, 'Got nothing'
+			else
+				telegram.sendMessage msg.chat.id, data
 
 	# Secret function: help for the BotFather
 	server.route '/father', (msg) ->

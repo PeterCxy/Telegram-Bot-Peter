@@ -23,5 +23,15 @@
 	"cmd": "parsetime",
 	"arg": "<time>",
 	"des": "[DEBUG] Output the milliseconds of parsed time. Format: AdBhCmDs"
+},
+{
+	"cmd": "store-put",
+	"arg": "<content>",
+	"des": "[DEBUG] Put <content> into temporary storage"
+},
+{
+	"cmd": "store-get",
+	"arg": "",
+	"des": "[DEBUG] Get content of temporary storage"
 }
 ]
