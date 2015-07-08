@@ -52,7 +52,7 @@ exports.setupRoutes = ->
 				telegram.sendMessage msg.chat.id, data
 
 	# Secret function: help for the BotFather
-	server.route '/father', 0, (msg) ->
+	server.route 'father', 0, (msg) ->
 		opt = ''
 		for h in help
 			opt += "#{h.cmd} - #{h.arg} #{h.des}\n"
