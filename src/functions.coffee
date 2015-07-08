@@ -7,7 +7,7 @@ help = require './conf/help.json'
 
 exports.setupRoutes = ->
 
-	server.route 'help', 1, (msg, args) ->
+	server.route 'help', -1, (msg, args) ->
 		opt = ""
 		if args.length == 0
 			for h in help
