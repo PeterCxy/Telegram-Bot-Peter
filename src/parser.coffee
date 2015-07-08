@@ -4,7 +4,7 @@ exports.parse = (cmd) ->
 	opt = ""
 	concat = no
 	for str, i in arr
-		continue if i == 0 || str == ""
+		continue if str == ""
 
 		if str.startsWith '"'
 			concat = yes

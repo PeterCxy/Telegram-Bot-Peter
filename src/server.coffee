@@ -1,26 +1,35 @@
 request = require 'request'
 
 telegram = require './telegram'
+parser = require './parser'
 auth = require './conf/auth.json'
 
 routes = []
 
-exports.route = (command, handler) ->
+exports.route = (cmd, args, handler) ->
 	r =
-		command: command
+		command: cmd,
+		numArgs: args,
 		handler: handler
 	routes.push r
 
 handleMessage = (msg) ->
 	console.log "Handling message " + msg.message_id
-	handler = (arg) ->
-		console.log 'Nothing done for ' + msg.text
-	l = 0
+	options = parser.parse msg.text
+	cmd = if options[0].startsWith '/' then options[0][1...] else ''
+	console.log 'Command: ' + cmd
+	handled = no
 	for r in routes
-		if (msg.text.startsWith r.command) and (r.command.length >= l)
-			handler = r.handler
-			l = r.command.length
-	handler msg
+		if r.command == cmd
+			if r.numArgs == options.length - 1 or r.numArgs < 0
+				r.handler msg, options[1...]
+			else
+				console.log 'Wrong usage of ' + cmd
+				telegram.sendMessage msg.chat.id, "Wrong usage. Consult the /help command for help."
+			handled = yes
+			break
+	if !handled
+		console.log 'Nothing done for ' + cmd
 
 exports.handleRequest = (req, res, next) ->
 	console.log req.params if req.params
