@@ -2,6 +2,7 @@ telegram = require './telegram'
 server = require './server'
 parser = require './parser'
 store = require './store'
+meizhi = require './meizhi'
 
 help = require './conf/help.json'
 
@@ -57,4 +58,7 @@ exports.setupRoutes = ->
 		for h in help
 			opt += "#{h.cmd} - #{h.arg} #{h.des}\n"
 		telegram.sendMessage msg.chat.id, opt
+
+	# Distribute other functions
+	server.route 'meizhi', -1, meizhi.handle
 
