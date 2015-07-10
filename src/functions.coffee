@@ -56,7 +56,7 @@ exports.setupRoutes = ->
 	server.route 'father', 0, (msg) ->
 		opt = ''
 		for h in help
-			opt += "#{h.cmd} - #{h.arg} #{h.des}\n"
+			opt += "#{h.cmd} - #{h.arg} #{h.des}\n" if !(h.des.startsWith '[DEBUG]')
 		telegram.sendMessage msg.chat.id, opt
 
 	# Distribute other functions
