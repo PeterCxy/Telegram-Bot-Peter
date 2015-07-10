@@ -17,7 +17,7 @@
 {
 	"cmd": "meizhi",
 	"arg": "[source]",
-	"des": "Get a picture of a girl (Chinese: Meizhi) from [source]. Available source: gank (gank.io), meizitu (meizitu.com). Default: gank"
+	"des": "Get a picture of a girl (Chinese: Meizhi) from [source]. Available source: gank (gank.io), meizitu (meizitu.com). Default: the source you used the last time (or 'gank' on first use)"
 },
 {
 	"cmd": "parse",
