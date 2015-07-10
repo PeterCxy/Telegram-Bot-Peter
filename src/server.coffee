@@ -13,6 +13,13 @@ exports.route = (cmd, args, handler) ->
 		handler: handler
 	routes.push r
 
+isCommand = (arg, cmd) ->
+	if (arg.indexOf '@') > 0
+		[command, username] = arg.split '@'
+		command == cmd and username == auth.name
+	else
+		arg == cmd
+
 handleMessage = (msg) ->
 	console.log "Handling message " + msg.message_id
 	options = parser.parse msg.text
@@ -20,7 +27,7 @@ handleMessage = (msg) ->
 	console.log 'Command: ' + cmd
 	handled = no
 	for r in routes
-		if r.command == cmd
+		if isCommand cmd, r.command
 			if r.numArgs == options.length - 1 or r.numArgs < 0
 				r.handler msg, options[1...]
 			else
