@@ -15,6 +15,11 @@
 	"des": "Send <message> to you after <time>. <time> should be in format: AdBhCmDs, must less than 24d."
 },
 {
+	"cmd": "meizhi",
+	"arg": "[source]",
+	"des": "Get a picture of a girl (Chinese: Meizhi) from [source]. Available source: gank (gank.io). Default: gank"
+},
+{
 	"cmd": "parse",
 	"arg": "anything",
 	"des": "[DEBUG] Output the parsed args"
