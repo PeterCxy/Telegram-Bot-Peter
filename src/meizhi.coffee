@@ -15,7 +15,7 @@ gank = (msg) ->
 				<img[^>]+src="([^">]+)"
 			///
 			url = (body.match regex)[1]
-			telegram.sendMessage msg.chat.id, url if url
+			telegram.sendPhoto msg.chat.id, (request url) if url
 				
 
 exports.handle = (msg, args) ->

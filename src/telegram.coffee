@@ -3,24 +3,36 @@ auth = require './conf/auth.json'
 
 class Telegram
 	constructor: (@auth) ->
+
+	callbackHandler: (error, response, body, callback) =>
+		console.log body
+		if body
+			result = JSON.parse body
+			if result.ok
+				callback null, result
+			else
+				error = new Error 'result is not okay'
+				callback error, result
+		else
+			callback error, null
 	
-	post: (method, data, callback) ->
+	post: (method, data, callback) =>
 		opts =
 			url: 'https://api.telegram.org/bot' + @auth + '/' + method
 			form: data
 			method: 'POST'
 		console.log opts.url
-		request opts, (error, response, body) ->
-			console.log body
-			if body
-				result = JSON.parse body
-				if result.ok
-					callback null, result
-				else
-					error = new Error description
-					callback error, result
-			else
-				callback error, null
+		request opts, (error, response, body) =>
+			this.callbackHandler error, response, body, callback
+	
+	# Multipart
+	postUpload: (method, data, callback) =>
+		opts =
+			url: 'https://api.telegram.org/bot' + @auth + "/" + method
+			formData: data
+		console.log opts.url
+		request.post opts, (error, response, body) =>
+			this.callbackHandler error, response, body, callback
 	
 	setWebhook: (url, callback) ->
 		opts =
@@ -34,5 +46,12 @@ class Telegram
 			text: text
 		this.post 'sendMessage', opts, (error, result) =>
 			console.log "Message" + result.message_id + " sent" if result.message_id
+	
+	sendPhoto: (chat, stream) =>
+		opts =
+			chat_id: chat
+			photo: stream
+		this.postUpload 'sendPhoto', opts, (error, result) =>
+			console.log 'Photo ' + result.message_id + ' sent' if result.message_id
 
 module.exports = new Telegram auth.key
