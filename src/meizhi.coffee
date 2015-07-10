@@ -33,7 +33,7 @@ gank = (msg) ->
 				
 meizitu = (msg) ->
 	[year, month, day] = randomDate 2015, 1
-	url = "http://pic.meizitu.com/wp-content/uploads/#{year}a/#{addZero month}/#{addZero day}/#{addZero Math.floor(Math.random() * 10) + 1}.jpg"
+	url = "http://pic.meizitu.com/wp-content/uploads/#{year}a/#{addZero month}/#{addZero day}/#{addZero Math.floor(Math.random() * 8) + 1}.jpg"
 	console.log url
 	stream = request url
 	telegram.sendPhoto msg.chat.id, stream if stream
