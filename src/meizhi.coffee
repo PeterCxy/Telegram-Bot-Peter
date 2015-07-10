@@ -10,7 +10,7 @@ randomDate = ->
 	date = new Date
 	year = Math.floor(Math.random() * (date.getFullYear() - 2015)) + 2015
 	month = Math.floor(Math.random() * (date.getMonth() - 3)) + 5
-	day = Math.floor(Math.random() * (if month == date.getMonth() - 1 then date.getDay() else 31)) + 1
+	day = Math.floor(Math.random() * (if month == date.getMonth() + 1 then date.getDay() else 31)) + 1
 	[year, month, day]
 
 gank = (msg) ->
