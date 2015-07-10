@@ -8,7 +8,7 @@ unrecognized = (msg) ->
 
 randomDate = (startYear, startMonth) ->
 	date = new Date
-	year = Math.floor(Math.random() * (date.getFullYear() - startYear + 2)) + startYear - 1
+	year = Math.floor(Math.random() * (date.getFullYear() - startYear + 1)) + startYear
 	month = Math.floor(Math.random() * (date.getMonth() - startMonth + 2)) + startMonth
 	day = Math.floor(Math.random() * (if month == date.getMonth() + 1 then date.getDay() else 31)) + 1
 	[year, month, day]
