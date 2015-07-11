@@ -42,7 +42,7 @@ gank = (msg) ->
 				
 meizitu = (msg) ->
 	setLast msg.chat.id, 'meizitu'
-	[year, month, day] = randomDate 2015, 1
+	[year, month, day] = randomDate 2014, 1
 	url = "http://pic.meizitu.com/wp-content/uploads/#{year}a/#{addZero month}/#{addZero day}/#{addZero Math.floor(Math.random() * 8) + 1}.jpg"
 	console.log url
 	stream = request url

@@ -45,13 +45,13 @@ class Telegram
 			chat_id: chat
 			text: text
 		@post 'sendMessage', opts, (error, result) =>
-			console.log "Message" + result.message_id + " sent" if result.message_id
+			console.log "Message sent to #{chat}" if result.ok
 	
 	sendPhoto: (chat, stream) =>
 		opts =
 			chat_id: chat
 			photo: stream
 		@postUpload 'sendPhoto', opts, (error, result) =>
-			console.log 'Photo ' + result.message_id + ' sent' if result.message_id
+			@sendMessage chat, ':P' if !result.ok
 
 module.exports = new Telegram auth.key
