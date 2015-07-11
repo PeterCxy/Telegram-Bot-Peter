@@ -23,7 +23,7 @@ class Telegram
 			method: 'POST'
 		console.log opts.url
 		request opts, (error, response, body) =>
-			this.callbackHandler error, response, body, callback
+			@callbackHandler error, response, body, callback
 	
 	# Multipart
 	postUpload: (method, data, callback) =>
@@ -32,26 +32,26 @@ class Telegram
 			formData: data
 		console.log opts.url
 		request.post opts, (error, response, body) =>
-			this.callbackHandler error, response, body, callback
+			@callbackHandler error, response, body, callback
 	
 	setWebhook: (url, callback) ->
 		opts =
 			url: url
-		this.post 'setWebHook', opts, (error, result) =>
+		@post 'setWebHook', opts, (error, result) =>
 			callback error
 	
 	sendMessage: (chat, text) ->
 		opts =
 			chat_id: chat
 			text: text
-		this.post 'sendMessage', opts, (error, result) =>
+		@post 'sendMessage', opts, (error, result) =>
 			console.log "Message" + result.message_id + " sent" if result.message_id
 	
 	sendPhoto: (chat, stream) =>
 		opts =
 			chat_id: chat
 			photo: stream
-		this.postUpload 'sendPhoto', opts, (error, result) =>
+		@postUpload 'sendPhoto', opts, (error, result) =>
 			console.log 'Photo ' + result.message_id + ' sent' if result.message_id
 
 module.exports = new Telegram auth.key
